@@ -2,7 +2,8 @@ package pack
 
 import (
 	"errors"
-	"tiktok-video/kitex_gen/video"
+
+	"github.com/41197-yhkt/tiktok-video/kitex_gen/video"
 
 	errno "github.com/41197-yhkt/pkg/errno"
 )

@@ -5,9 +5,10 @@ import (
 	"context"
 	"log"
 	"sync"
-	"tiktok-video/gen/dal/model"
-	vedio "tiktok-video/kitex_gen/video"
 	"time"
+
+	"github.com/41197-yhkt/tiktok-video/gen/dal/model"
+	vedio "github.com/41197-yhkt/tiktok-video/kitex_gen/video"
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 )

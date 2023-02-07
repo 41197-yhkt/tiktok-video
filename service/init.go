@@ -1,8 +1,8 @@
 package service
 
 import (
-	dal "tiktok-video/gen/dal"
-	query "tiktok-video/gen/dal/query"
+	dal "github.com/41197-yhkt/tiktok-video/gen/dal"
+	query "github.com/41197-yhkt/tiktok-video/gen/dal/query"
 )
 
 var q *query.Query

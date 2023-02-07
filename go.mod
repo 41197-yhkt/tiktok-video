@@ -1,4 +1,4 @@
-module tiktok-video
+module github.com/41197-yhkt/tiktok-video
 
 go 1.19
 

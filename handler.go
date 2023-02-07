@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
-	video "tiktok-video/kitex_gen/video"
-	"tiktok-video/pack"
-	service "tiktok-video/service"
+
+	video "github.com/41197-yhkt/tiktok-video/kitex_gen/video"
+	"github.com/41197-yhkt/tiktok-video/pack"
+	service "github.com/41197-yhkt/tiktok-video/service"
 
 	errno "github.com/41197-yhkt/pkg/errno"
 )

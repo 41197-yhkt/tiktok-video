@@ -3,9 +3,10 @@ package main
 import (
 	"log"
 	"net"
-	"tiktok-video/gen/dal"
-	video "tiktok-video/kitex_gen/video/douyinservice"
-	"tiktok-video/service"
+
+	"github.com/41197-yhkt/tiktok-video/gen/dal"
+	video "github.com/41197-yhkt/tiktok-video/kitex_gen/video/douyinservice"
+	"github.com/41197-yhkt/tiktok-video/service"
 
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
@@ -29,7 +30,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	addr, err := net.ResolveTCPAddr("tcp", "127.0.0.1:8889")
+	addr, err := net.ResolveTCPAddr("tcp", "127.0.0.1:8890")
 	if err != nil {
 		panic(err)
 	}

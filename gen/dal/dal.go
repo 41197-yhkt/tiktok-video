@@ -2,7 +2,8 @@ package dal
 
 import (
 	"sync"
-	model "tiktok-video/gen/dal/model"
+
+	model "github.com/41197-yhkt/tiktok-video/gen/dal/model"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -20,7 +21,7 @@ func Init() {
 }
 
 func ConnctDB() (conn *gorm.DB) {
-	conn, err := gorm.Open(mysql.Open("root:123456@tcp(192.168.1.102:3306)/gorm?charset=utf8&parseTime=True&loc=Local"), &gorm.Config{})
+	conn, err := gorm.Open(mysql.Open("root:123456@tcp(localhost:6666)/tiktok_db?charset=utf8&parseTime=True&loc=Local"), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
