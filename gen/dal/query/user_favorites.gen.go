@@ -34,7 +34,7 @@ func newUserFavorite(db *gorm.DB, opts ...gen.DOOption) userFavorite {
 	_userFavorite.DeletedAt = field.NewField(tableName, "deleted_at")
 	_userFavorite.Id = field.NewUint(tableName, "id")
 	_userFavorite.UserId = field.NewInt64(tableName, "user_id")
-	_userFavorite.VedioId = field.NewInt64(tableName, "vedio_id")
+	_userFavorite.VideoId = field.NewInt64(tableName, "video_id")
 
 	_userFavorite.fillFieldMap()
 
@@ -51,7 +51,7 @@ type userFavorite struct {
 	DeletedAt field.Field
 	Id        field.Uint
 	UserId    field.Int64
-	VedioId   field.Int64
+	VideoId   field.Int64
 
 	fieldMap map[string]field.Expr
 }
@@ -74,7 +74,7 @@ func (u *userFavorite) updateTableName(table string) *userFavorite {
 	u.DeletedAt = field.NewField(table, "deleted_at")
 	u.Id = field.NewUint(table, "id")
 	u.UserId = field.NewInt64(table, "user_id")
-	u.VedioId = field.NewInt64(table, "vedio_id")
+	u.VideoId = field.NewInt64(table, "video_id")
 
 	u.fillFieldMap()
 
@@ -106,7 +106,7 @@ func (u *userFavorite) fillFieldMap() {
 	u.fieldMap["deleted_at"] = u.DeletedAt
 	u.fieldMap["id"] = u.Id
 	u.fieldMap["user_id"] = u.UserId
-	u.fieldMap["vedio_id"] = u.VedioId
+	u.fieldMap["video_id"] = u.VideoId
 }
 
 func (u userFavorite) clone(db *gorm.DB) userFavorite {
@@ -121,14 +121,14 @@ func (u userFavorite) replaceDB(db *gorm.DB) userFavorite {
 
 type userFavoriteDo struct{ gen.DO }
 
-// sql(select * from @@table where vedio_id = @vedioId and user_id = @userId)
-func (u userFavoriteDo) FindByUseridAndVedioid(userId int64, vedioId int64) (err error) {
+// sql(select * from @@table where video_id = @videoId and user_id = @userId)
+func (u userFavoriteDo) FindByUseridAndVideoid(userId int64, videoId int64) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
-	params = append(params, vedioId)
+	params = append(params, videoId)
 	params = append(params, userId)
-	generateSQL.WriteString("select * from user_favorites where vedio_id = ? and user_id = ? ")
+	generateSQL.WriteString("select * from user_favorites where video_id = ? and user_id = ? ")
 
 	var executeSQL *gorm.DB
 

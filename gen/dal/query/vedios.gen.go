@@ -20,35 +20,35 @@ import (
 	"github.com/41197-yhkt/tiktok-video/gen/dal/model"
 )
 
-func newVedio(db *gorm.DB, opts ...gen.DOOption) vedio {
-	_vedio := vedio{}
+func newVideo(db *gorm.DB, opts ...gen.DOOption) video {
+	_video := video{}
 
-	_vedio.vedioDo.UseDB(db, opts...)
-	_vedio.vedioDo.UseModel(&model.Vedio{})
+	_video.videoDo.UseDB(db, opts...)
+	_video.videoDo.UseModel(&model.Video{})
 
-	tableName := _vedio.vedioDo.TableName()
-	_vedio.ALL = field.NewAsterisk(tableName)
-	_vedio.ID = field.NewUint(tableName, "id")
-	_vedio.CreatedAt = field.NewTime(tableName, "created_at")
-	_vedio.UpdatedAt = field.NewTime(tableName, "updated_at")
-	_vedio.DeletedAt = field.NewField(tableName, "deleted_at")
-	_vedio.Id = field.NewUint(tableName, "id")
-	_vedio.AuthorId = field.NewInt64(tableName, "author_id")
-	_vedio.PlayUrl = field.NewString(tableName, "play_url")
-	_vedio.CoverUrl = field.NewString(tableName, "cover_url")
-	_vedio.FavoriteCount = field.NewString(tableName, "favorite_count")
-	_vedio.CommentCount = field.NewString(tableName, "comment_count")
-	_vedio.Title = field.NewString(tableName, "title")
-	_vedio.Created_at = field.NewTime(tableName, "created_at")
-	_vedio.Updated_at = field.NewTime(tableName, "updated_at")
+	tableName := _video.videoDo.TableName()
+	_video.ALL = field.NewAsterisk(tableName)
+	_video.ID = field.NewUint(tableName, "id")
+	_video.CreatedAt = field.NewTime(tableName, "created_at")
+	_video.UpdatedAt = field.NewTime(tableName, "updated_at")
+	_video.DeletedAt = field.NewField(tableName, "deleted_at")
+	_video.Id = field.NewUint(tableName, "id")
+	_video.AuthorId = field.NewInt64(tableName, "author_id")
+	_video.PlayUrl = field.NewString(tableName, "play_url")
+	_video.CoverUrl = field.NewString(tableName, "cover_url")
+	_video.FavoriteCount = field.NewString(tableName, "favorite_count")
+	_video.CommentCount = field.NewString(tableName, "comment_count")
+	_video.Title = field.NewString(tableName, "title")
+	_video.Created_at = field.NewTime(tableName, "created_at")
+	_video.Updated_at = field.NewTime(tableName, "updated_at")
 
-	_vedio.fillFieldMap()
+	_video.fillFieldMap()
 
-	return _vedio
+	return _video
 }
 
-type vedio struct {
-	vedioDo vedioDo
+type video struct {
+	videoDo videoDo
 
 	ALL           field.Asterisk
 	ID            field.Uint
@@ -68,17 +68,17 @@ type vedio struct {
 	fieldMap map[string]field.Expr
 }
 
-func (v vedio) Table(newTableName string) *vedio {
-	v.vedioDo.UseTable(newTableName)
+func (v video) Table(newTableName string) *video {
+	v.videoDo.UseTable(newTableName)
 	return v.updateTableName(newTableName)
 }
 
-func (v vedio) As(alias string) *vedio {
-	v.vedioDo.DO = *(v.vedioDo.As(alias).(*gen.DO))
+func (v video) As(alias string) *video {
+	v.videoDo.DO = *(v.videoDo.As(alias).(*gen.DO))
 	return v.updateTableName(alias)
 }
 
-func (v *vedio) updateTableName(table string) *vedio {
+func (v *video) updateTableName(table string) *video {
 	v.ALL = field.NewAsterisk(table)
 	v.ID = field.NewUint(table, "id")
 	v.CreatedAt = field.NewTime(table, "created_at")
@@ -99,13 +99,13 @@ func (v *vedio) updateTableName(table string) *vedio {
 	return v
 }
 
-func (v *vedio) WithContext(ctx context.Context) *vedioDo { return v.vedioDo.WithContext(ctx) }
+func (v *video) WithContext(ctx context.Context) *videoDo { return v.videoDo.WithContext(ctx) }
 
-func (v vedio) TableName() string { return v.vedioDo.TableName() }
+func (v video) TableName() string { return v.videoDo.TableName() }
 
-func (v vedio) Alias() string { return v.vedioDo.Alias() }
+func (v video) Alias() string { return v.videoDo.Alias() }
 
-func (v *vedio) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
+func (v *video) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	_f, ok := v.fieldMap[fieldName]
 	if !ok || _f == nil {
 		return nil, false
@@ -114,7 +114,7 @@ func (v *vedio) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	return _oe, ok
 }
 
-func (v *vedio) fillFieldMap() {
+func (v *video) fillFieldMap() {
 	v.fieldMap = make(map[string]field.Expr, 13)
 	v.fieldMap["id"] = v.ID
 	v.fieldMap["created_at"] = v.CreatedAt
@@ -131,20 +131,20 @@ func (v *vedio) fillFieldMap() {
 	v.fieldMap["updated_at"] = v.Updated_at
 }
 
-func (v vedio) clone(db *gorm.DB) vedio {
-	v.vedioDo.ReplaceConnPool(db.Statement.ConnPool)
+func (v video) clone(db *gorm.DB) video {
+	v.videoDo.ReplaceConnPool(db.Statement.ConnPool)
 	return v
 }
 
-func (v vedio) replaceDB(db *gorm.DB) vedio {
-	v.vedioDo.ReplaceDB(db)
+func (v video) replaceDB(db *gorm.DB) video {
+	v.videoDo.ReplaceDB(db)
 	return v
 }
 
-type vedioDo struct{ gen.DO }
+type videoDo struct{ gen.DO }
 
 // where(id=@id)
-func (v vedioDo) FindByID(id int64) (result model.Vedio, err error) {
+func (v videoDo) FindByID(id int64) (result model.Video, err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -159,12 +159,12 @@ func (v vedioDo) FindByID(id int64) (result model.Vedio, err error) {
 }
 
 // sql(select * from @@table where AuthorId = @Authorid)
-func (v vedioDo) FindByAuthorId(Authorid int) (result model.Vedio, err error) {
+func (v videoDo) FindByAuthorId(Authorid int) (result model.Video, err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
 	params = append(params, Authorid)
-	generateSQL.WriteString("select * from vedios where AuthorId = ? ")
+	generateSQL.WriteString("select * from videos where AuthorId = ? ")
 
 	var executeSQL *gorm.DB
 
@@ -173,153 +173,153 @@ func (v vedioDo) FindByAuthorId(Authorid int) (result model.Vedio, err error) {
 	return
 }
 
-func (v vedioDo) Debug() *vedioDo {
+func (v videoDo) Debug() *videoDo {
 	return v.withDO(v.DO.Debug())
 }
 
-func (v vedioDo) WithContext(ctx context.Context) *vedioDo {
+func (v videoDo) WithContext(ctx context.Context) *videoDo {
 	return v.withDO(v.DO.WithContext(ctx))
 }
 
-func (v vedioDo) ReadDB() *vedioDo {
+func (v videoDo) ReadDB() *videoDo {
 	return v.Clauses(dbresolver.Read)
 }
 
-func (v vedioDo) WriteDB() *vedioDo {
+func (v videoDo) WriteDB() *videoDo {
 	return v.Clauses(dbresolver.Write)
 }
 
-func (v vedioDo) Session(config *gorm.Session) *vedioDo {
+func (v videoDo) Session(config *gorm.Session) *videoDo {
 	return v.withDO(v.DO.Session(config))
 }
 
-func (v vedioDo) Clauses(conds ...clause.Expression) *vedioDo {
+func (v videoDo) Clauses(conds ...clause.Expression) *videoDo {
 	return v.withDO(v.DO.Clauses(conds...))
 }
 
-func (v vedioDo) Returning(value interface{}, columns ...string) *vedioDo {
+func (v videoDo) Returning(value interface{}, columns ...string) *videoDo {
 	return v.withDO(v.DO.Returning(value, columns...))
 }
 
-func (v vedioDo) Not(conds ...gen.Condition) *vedioDo {
+func (v videoDo) Not(conds ...gen.Condition) *videoDo {
 	return v.withDO(v.DO.Not(conds...))
 }
 
-func (v vedioDo) Or(conds ...gen.Condition) *vedioDo {
+func (v videoDo) Or(conds ...gen.Condition) *videoDo {
 	return v.withDO(v.DO.Or(conds...))
 }
 
-func (v vedioDo) Select(conds ...field.Expr) *vedioDo {
+func (v videoDo) Select(conds ...field.Expr) *videoDo {
 	return v.withDO(v.DO.Select(conds...))
 }
 
-func (v vedioDo) Where(conds ...gen.Condition) *vedioDo {
+func (v videoDo) Where(conds ...gen.Condition) *videoDo {
 	return v.withDO(v.DO.Where(conds...))
 }
 
-func (v vedioDo) Exists(subquery interface{ UnderlyingDB() *gorm.DB }) *vedioDo {
+func (v videoDo) Exists(subquery interface{ UnderlyingDB() *gorm.DB }) *videoDo {
 	return v.Where(field.CompareSubQuery(field.ExistsOp, nil, subquery.UnderlyingDB()))
 }
 
-func (v vedioDo) Order(conds ...field.Expr) *vedioDo {
+func (v videoDo) Order(conds ...field.Expr) *videoDo {
 	return v.withDO(v.DO.Order(conds...))
 }
 
-func (v vedioDo) Distinct(cols ...field.Expr) *vedioDo {
+func (v videoDo) Distinct(cols ...field.Expr) *videoDo {
 	return v.withDO(v.DO.Distinct(cols...))
 }
 
-func (v vedioDo) Omit(cols ...field.Expr) *vedioDo {
+func (v videoDo) Omit(cols ...field.Expr) *videoDo {
 	return v.withDO(v.DO.Omit(cols...))
 }
 
-func (v vedioDo) Join(table schema.Tabler, on ...field.Expr) *vedioDo {
+func (v videoDo) Join(table schema.Tabler, on ...field.Expr) *videoDo {
 	return v.withDO(v.DO.Join(table, on...))
 }
 
-func (v vedioDo) LeftJoin(table schema.Tabler, on ...field.Expr) *vedioDo {
+func (v videoDo) LeftJoin(table schema.Tabler, on ...field.Expr) *videoDo {
 	return v.withDO(v.DO.LeftJoin(table, on...))
 }
 
-func (v vedioDo) RightJoin(table schema.Tabler, on ...field.Expr) *vedioDo {
+func (v videoDo) RightJoin(table schema.Tabler, on ...field.Expr) *videoDo {
 	return v.withDO(v.DO.RightJoin(table, on...))
 }
 
-func (v vedioDo) Group(cols ...field.Expr) *vedioDo {
+func (v videoDo) Group(cols ...field.Expr) *videoDo {
 	return v.withDO(v.DO.Group(cols...))
 }
 
-func (v vedioDo) Having(conds ...gen.Condition) *vedioDo {
+func (v videoDo) Having(conds ...gen.Condition) *videoDo {
 	return v.withDO(v.DO.Having(conds...))
 }
 
-func (v vedioDo) Limit(limit int) *vedioDo {
+func (v videoDo) Limit(limit int) *videoDo {
 	return v.withDO(v.DO.Limit(limit))
 }
 
-func (v vedioDo) Offset(offset int) *vedioDo {
+func (v videoDo) Offset(offset int) *videoDo {
 	return v.withDO(v.DO.Offset(offset))
 }
 
-func (v vedioDo) Scopes(funcs ...func(gen.Dao) gen.Dao) *vedioDo {
+func (v videoDo) Scopes(funcs ...func(gen.Dao) gen.Dao) *videoDo {
 	return v.withDO(v.DO.Scopes(funcs...))
 }
 
-func (v vedioDo) Unscoped() *vedioDo {
+func (v videoDo) Unscoped() *videoDo {
 	return v.withDO(v.DO.Unscoped())
 }
 
-func (v vedioDo) Create(values ...*model.Vedio) error {
+func (v videoDo) Create(values ...*model.Video) error {
 	if len(values) == 0 {
 		return nil
 	}
 	return v.DO.Create(values)
 }
 
-func (v vedioDo) CreateInBatches(values []*model.Vedio, batchSize int) error {
+func (v videoDo) CreateInBatches(values []*model.Video, batchSize int) error {
 	return v.DO.CreateInBatches(values, batchSize)
 }
 
 // Save : !!! underlying implementation is different with GORM
 // The method is equivalent to executing the statement: db.Clauses(clause.OnConflict{UpdateAll: true}).Create(values)
-func (v vedioDo) Save(values ...*model.Vedio) error {
+func (v videoDo) Save(values ...*model.Video) error {
 	if len(values) == 0 {
 		return nil
 	}
 	return v.DO.Save(values)
 }
 
-func (v vedioDo) First() (*model.Vedio, error) {
+func (v videoDo) First() (*model.Video, error) {
 	if result, err := v.DO.First(); err != nil {
 		return nil, err
 	} else {
-		return result.(*model.Vedio), nil
+		return result.(*model.Video), nil
 	}
 }
 
-func (v vedioDo) Take() (*model.Vedio, error) {
+func (v videoDo) Take() (*model.Video, error) {
 	if result, err := v.DO.Take(); err != nil {
 		return nil, err
 	} else {
-		return result.(*model.Vedio), nil
+		return result.(*model.Video), nil
 	}
 }
 
-func (v vedioDo) Last() (*model.Vedio, error) {
+func (v videoDo) Last() (*model.Video, error) {
 	if result, err := v.DO.Last(); err != nil {
 		return nil, err
 	} else {
-		return result.(*model.Vedio), nil
+		return result.(*model.Video), nil
 	}
 }
 
-func (v vedioDo) Find() ([]*model.Vedio, error) {
+func (v videoDo) Find() ([]*model.Video, error) {
 	result, err := v.DO.Find()
-	return result.([]*model.Vedio), err
+	return result.([]*model.Video), err
 }
 
-func (v vedioDo) FindInBatch(batchSize int, fc func(tx gen.Dao, batch int) error) (results []*model.Vedio, err error) {
-	buf := make([]*model.Vedio, 0, batchSize)
+func (v videoDo) FindInBatch(batchSize int, fc func(tx gen.Dao, batch int) error) (results []*model.Video, err error) {
+	buf := make([]*model.Video, 0, batchSize)
 	err = v.DO.FindInBatches(&buf, batchSize, func(tx gen.Dao, batch int) error {
 		defer func() { results = append(results, buf...) }()
 		return fc(tx, batch)
@@ -327,49 +327,49 @@ func (v vedioDo) FindInBatch(batchSize int, fc func(tx gen.Dao, batch int) error
 	return results, err
 }
 
-func (v vedioDo) FindInBatches(result *[]*model.Vedio, batchSize int, fc func(tx gen.Dao, batch int) error) error {
+func (v videoDo) FindInBatches(result *[]*model.Video, batchSize int, fc func(tx gen.Dao, batch int) error) error {
 	return v.DO.FindInBatches(result, batchSize, fc)
 }
 
-func (v vedioDo) Attrs(attrs ...field.AssignExpr) *vedioDo {
+func (v videoDo) Attrs(attrs ...field.AssignExpr) *videoDo {
 	return v.withDO(v.DO.Attrs(attrs...))
 }
 
-func (v vedioDo) Assign(attrs ...field.AssignExpr) *vedioDo {
+func (v videoDo) Assign(attrs ...field.AssignExpr) *videoDo {
 	return v.withDO(v.DO.Assign(attrs...))
 }
 
-func (v vedioDo) Joins(fields ...field.RelationField) *vedioDo {
+func (v videoDo) Joins(fields ...field.RelationField) *videoDo {
 	for _, _f := range fields {
 		v = *v.withDO(v.DO.Joins(_f))
 	}
 	return &v
 }
 
-func (v vedioDo) Preload(fields ...field.RelationField) *vedioDo {
+func (v videoDo) Preload(fields ...field.RelationField) *videoDo {
 	for _, _f := range fields {
 		v = *v.withDO(v.DO.Preload(_f))
 	}
 	return &v
 }
 
-func (v vedioDo) FirstOrInit() (*model.Vedio, error) {
+func (v videoDo) FirstOrInit() (*model.Video, error) {
 	if result, err := v.DO.FirstOrInit(); err != nil {
 		return nil, err
 	} else {
-		return result.(*model.Vedio), nil
+		return result.(*model.Video), nil
 	}
 }
 
-func (v vedioDo) FirstOrCreate() (*model.Vedio, error) {
+func (v videoDo) FirstOrCreate() (*model.Video, error) {
 	if result, err := v.DO.FirstOrCreate(); err != nil {
 		return nil, err
 	} else {
-		return result.(*model.Vedio), nil
+		return result.(*model.Video), nil
 	}
 }
 
-func (v vedioDo) FindByPage(offset int, limit int) (result []*model.Vedio, count int64, err error) {
+func (v videoDo) FindByPage(offset int, limit int) (result []*model.Video, count int64, err error) {
 	result, err = v.Offset(offset).Limit(limit).Find()
 	if err != nil {
 		return
@@ -384,7 +384,7 @@ func (v vedioDo) FindByPage(offset int, limit int) (result []*model.Vedio, count
 	return
 }
 
-func (v vedioDo) ScanByPage(result interface{}, offset int, limit int) (count int64, err error) {
+func (v videoDo) ScanByPage(result interface{}, offset int, limit int) (count int64, err error) {
 	count, err = v.Count()
 	if err != nil {
 		return
@@ -394,15 +394,15 @@ func (v vedioDo) ScanByPage(result interface{}, offset int, limit int) (count in
 	return
 }
 
-func (v vedioDo) Scan(result interface{}) (err error) {
+func (v videoDo) Scan(result interface{}) (err error) {
 	return v.DO.Scan(result)
 }
 
-func (v vedioDo) Delete(models ...*model.Vedio) (result gen.ResultInfo, err error) {
+func (v videoDo) Delete(models ...*model.Video) (result gen.ResultInfo, err error) {
 	return v.DO.Delete(models)
 }
 
-func (v *vedioDo) withDO(do gen.Dao) *vedioDo {
+func (v *videoDo) withDO(do gen.Dao) *videoDo {
 	v.DO = *do.(*gen.DO)
 	return v
 }

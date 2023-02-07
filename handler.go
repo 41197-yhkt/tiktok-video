@@ -59,29 +59,29 @@ func (s *DouyinServiceImpl) DouyinPublishListMethod(ctx context.Context, req *vi
 	return resp, nil
 }
 
-// DouyinGetVedioMethod implements the DouyinServiceImpl interface.
-func (s *DouyinServiceImpl) DouyinGetVedioMethod(ctx context.Context, req *video.GetVedioRequest) (resp *video.GetVedioResponse, err error) {
+// DouyinGetVideoMethod implements the DouyinServiceImpl interface.
+func (s *DouyinServiceImpl) DouyinGetVideoMethod(ctx context.Context, req *video.GetVideoRequest) (resp *video.GetVideoResponse, err error) {
 	// TODO: Your code here...
-	resp = new(video.GetVedioResponse)
+	resp = new(video.GetVideoResponse)
 
 	//调用服务
-	resp.Video, err = service.NewGetVedioService(ctx).GetVedio(req)
+	resp.Video, err = service.NewGetVideoService(ctx).GetVideo(req)
 
 	return resp, err
 }
 
-// DouyinMGetVedioMethod implements the DouyinServiceImpl interface.
-func (s *DouyinServiceImpl) DouyinMGetVedioMethod(ctx context.Context, req *video.MGetVedioRequest) (resp *video.MGetVedioResponse, err error) {
+// DouyinMGetVideoMethod implements the DouyinServiceImpl interface.
+func (s *DouyinServiceImpl) DouyinMGetVideoMethod(ctx context.Context, req *video.MGetVideoRequest) (resp *video.MGetVideoResponse, err error) {
 	// TODO: Your code here...
-	resp = new(video.MGetVedioResponse)
+	resp = new(video.MGetVideoResponse)
 	var res *video.Video
-	for _, vid := range req.TargetVediosId {
-		r := new(video.GetVedioRequest)
+	for _, vid := range req.TargetVideosId {
+		r := new(video.GetVideoRequest)
 		r.UserId = req.UserId
-		r.TargetVedioId = vid
+		r.TargetVideoId = vid
 
-		res, err = service.NewGetVedioService(ctx).GetVedio(r)
-		resp.VedioList = append(resp.VedioList, res)
+		res, err = service.NewGetVideoService(ctx).GetVideo(r)
+		resp.VideoList = append(resp.VideoList, res)
 	}
 	return resp, err
 }

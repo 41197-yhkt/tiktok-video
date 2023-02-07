@@ -13,8 +13,8 @@ import (
 type Client interface {
 	DouyinPublishActionMethod(ctx context.Context, req *video.DouyinPublishActionRequest, callOptions ...callopt.Option) (r *video.DouyinPublishActionResponse, err error)
 	DouyinPublishListMethod(ctx context.Context, req *video.DouyinPublishListRequest, callOptions ...callopt.Option) (r *video.DouyinPublishListResponse, err error)
-	DouyinGetVedioMethod(ctx context.Context, req *video.GetVedioRequest, callOptions ...callopt.Option) (r *video.GetVedioResponse, err error)
-	DouyinMGetVedioMethod(ctx context.Context, req *video.MGetVedioRequest, callOptions ...callopt.Option) (r *video.MGetVedioResponse, err error)
+	DouyinGetVideoMethod(ctx context.Context, req *video.GetVideoRequest, callOptions ...callopt.Option) (r *video.GetVideoResponse, err error)
+	DouyinMGetVideoMethod(ctx context.Context, req *video.MGetVideoRequest, callOptions ...callopt.Option) (r *video.MGetVideoResponse, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -56,12 +56,12 @@ func (p *kDouyinServiceClient) DouyinPublishListMethod(ctx context.Context, req 
 	return p.kClient.DouyinPublishListMethod(ctx, req)
 }
 
-func (p *kDouyinServiceClient) DouyinGetVedioMethod(ctx context.Context, req *video.GetVedioRequest, callOptions ...callopt.Option) (r *video.GetVedioResponse, err error) {
+func (p *kDouyinServiceClient) DouyinGetVideoMethod(ctx context.Context, req *video.GetVideoRequest, callOptions ...callopt.Option) (r *video.GetVideoResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.DouyinGetVedioMethod(ctx, req)
+	return p.kClient.DouyinGetVideoMethod(ctx, req)
 }
 
-func (p *kDouyinServiceClient) DouyinMGetVedioMethod(ctx context.Context, req *video.MGetVedioRequest, callOptions ...callopt.Option) (r *video.MGetVedioResponse, err error) {
+func (p *kDouyinServiceClient) DouyinMGetVideoMethod(ctx context.Context, req *video.MGetVideoRequest, callOptions ...callopt.Option) (r *video.MGetVideoResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.DouyinMGetVedioMethod(ctx, req)
+	return p.kClient.DouyinMGetVideoMethod(ctx, req)
 }

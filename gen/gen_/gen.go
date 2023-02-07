@@ -14,11 +14,11 @@ func main() {
 	})
 
 	// 调用 ApplyBasic 基于 model 来生成基础 DAL 代码
-	g.ApplyBasic(model.Vedio{}, model.User{}, model.UserFavorite{})
+	g.ApplyBasic(model.Video{}, model.User{}, model.UserFavorite{})
 
 	// 调用 ApplyInterface，指明我们希望基于什么 model 和 interface 来生成自定义的接口实现
 	g.ApplyInterface(func(model.UserMethod) {}, model.User{})
-	g.ApplyInterface(func(model.VedioMethod) {}, model.Vedio{})
+	g.ApplyInterface(func(model.VideoMethod) {}, model.Video{})
 	g.ApplyInterface(func(model.UserFavoriteMethod) {}, model.UserFavorite{})
 
 	// 最后调用 Execute 方法来触发生成

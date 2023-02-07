@@ -12,7 +12,7 @@ type User struct {
 	Name string `gorm:"column:name"`
 }
 
-type Vedio struct {
+type Video struct {
 	gorm.Model
 	Id            uint      `gorm:"primary_key"`
 	AuthorId      int64     `gorm:"column:author_id"`
@@ -29,5 +29,5 @@ type UserFavorite struct {
 	gorm.Model
 	Id      uint  `gorm:"primary_key"`
 	UserId  int64 `gorm:"column:user_id"`
-	VedioId int64 `gorm:"column:vedio_id"`
+	VideoId int64 `gorm:"column:video_id"`
 }

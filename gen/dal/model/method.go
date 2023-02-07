@@ -5,14 +5,14 @@ import (
 )
 
 type UserFavoriteMethod interface {
-	// //sql(select vedio_id from @@table where user_id = @userId)
+	// //sql(select video_id from @@table where user_id = @userId)
 	// FindByUserid(userId int64) (gen.T, error)
 
-	// //sql(select user_id from @@table where vedio_id = @vedioId)
-	// FindByVedioid(vedioId int64) (gen.T, error)
+	// //sql(select user_id from @@table where video_id = @videoId)
+	// FindByVideoid(videoId int64) (gen.T, error)
 
-	//sql(select * from @@table where vedio_id = @vedioId and user_id = @userId)
-	FindByUseridAndVedioid(userId, vedioId int64) error
+	//sql(select * from @@table where video_id = @videoId and user_id = @userId)
+	FindByUseridAndVideoid(userId, videoId int64) error
 }
 
 type UserMethod interface {
@@ -20,7 +20,7 @@ type UserMethod interface {
 	FindByID(id int64) (gen.T, error)
 }
 
-type VedioMethod interface {
+type VideoMethod interface {
 	//where(id=@id)
 	FindByID(id int64) (gen.T, error)
 	//sql(select * from @@table where AuthorId = @Authorid)

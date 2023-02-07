@@ -8,7 +8,7 @@ import (
 
 	dal "github.com/41197-yhkt/tiktok-video/gen/dal"
 	"github.com/41197-yhkt/tiktok-video/gen/dal/model"
-	vedio "github.com/41197-yhkt/tiktok-video/kitex_gen/video"
+	video "github.com/41197-yhkt/tiktok-video/kitex_gen/video"
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 )
@@ -22,8 +22,8 @@ func NewPublishListService(ctx context.Context) *PublishListService {
 	return &PublishListService{ctx: ctx}
 }
 
-func (s *PublishListService) PublishList(req *vedio.DouyinPublishListRequest) ([]*vedio.Video, error) {
-	//vedioDatabase := q.Vedio.WithContext(s.ctx)
+func (s *PublishListService) PublishList(req *video.DouyinPublishListRequest) ([]*video.Video, error) {
+	//videoDatabase := q.Video.WithContext(s.ctx)
 	//client为阿里云oss对象
 	client, err := oss.New("oss-cn-beijing.aliyuncs.com", "LTAI5tGdrFczu9cP7RX8LgrC", "I0P6eEUAk740O5jM1VLbvfePs5yGAf")
 	if err != nil {
@@ -38,21 +38,21 @@ func (s *PublishListService) PublishList(req *vedio.DouyinPublishListRequest) ([
 	userFavoriteDatabase := q.UserFavorite.WithContext(s.ctx)
 	//userDatabase := q.User.WithContext(s.ctx)
 
-	// 先根据 user_id 选出 vedios
-	var vedios []*model.Vedio
+	// 先根据 user_id 选出 videos
+	var videos []*model.Video
 	var isFavorite bool
 
-	dal.DB.WithContext(s.ctx).Where("author_id = ?", req.UserId).Find(&vedios)
-	fmt.Println(vedios)
+	dal.DB.WithContext(s.ctx).Where("author_id = ?", req.UserId).Find(&videos)
+	fmt.Println(videos)
 
-	// 根据 vedio_id 查 Vedio
-	res := []*vedio.Video{}
-	for _, vd := range vedios {
-		// vedio, err := vedioDatabase.FindByID(int64(vd.Id))
+	// 根据 video_id 查 Video
+	res := []*video.Video{}
+	for _, vd := range videos {
+		// video, err := videoDatabase.FindByID(int64(vd.Id))
 		// if err != nil {
 		//     panic(err)
 		// }
-		var user *vedio.User
+		var user *video.User
 		dal.DB.WithContext(s.ctx).Select("name").Where("id = ?", vd.AuthorId).Find(&user.Name)
 
 		// 查询点赞数目
@@ -65,7 +65,7 @@ func (s *PublishListService) PublishList(req *vedio.DouyinPublishListRequest) ([
 
 		// 查询自己是不是也点了赞
 
-		err = userFavoriteDatabase.WithContext(s.ctx).FindByUseridAndVedioid(req.UserId, int64(vd.Id))
+		err = userFavoriteDatabase.WithContext(s.ctx).FindByUseridAndVideoid(req.UserId, int64(vd.Id))
 		if err != nil {
 			isFavorite = false
 		} else {
@@ -83,7 +83,7 @@ func (s *PublishListService) PublishList(req *vedio.DouyinPublishListRequest) ([
 		}
 
 		// 封装
-		res = append(res, &vedio.Video{
+		res = append(res, &video.Video{
 			Id:            int64(vd.Id),
 			Author:        user,
 			PlayUrl:       playurl,

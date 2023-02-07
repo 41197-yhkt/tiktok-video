@@ -16,7 +16,7 @@ var once sync.Once
 func Init() {
 	once.Do(func() {
 		DB = ConnctDB().Debug()
-		_ = DB.AutoMigrate(&model.Vedio{}, &model.User{}, &model.UserFavorite{})
+		_ = DB.AutoMigrate(&model.Video{}, &model.User{}, &model.UserFavorite{})
 	})
 }
 
