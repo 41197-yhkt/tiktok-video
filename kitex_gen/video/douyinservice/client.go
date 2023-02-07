@@ -13,6 +13,8 @@ import (
 type Client interface {
 	DouyinPublishActionMethod(ctx context.Context, req *video.DouyinPublishActionRequest, callOptions ...callopt.Option) (r *video.DouyinPublishActionResponse, err error)
 	DouyinPublishListMethod(ctx context.Context, req *video.DouyinPublishListRequest, callOptions ...callopt.Option) (r *video.DouyinPublishListResponse, err error)
+	DouyinGetVedioMethod(ctx context.Context, req *video.GetVedioRequest, callOptions ...callopt.Option) (r *video.GetVedioResponse, err error)
+	DouyinMGetVedioMethod(ctx context.Context, req *video.MGetVedioRequest, callOptions ...callopt.Option) (r *video.MGetVedioResponse, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -52,4 +54,14 @@ func (p *kDouyinServiceClient) DouyinPublishActionMethod(ctx context.Context, re
 func (p *kDouyinServiceClient) DouyinPublishListMethod(ctx context.Context, req *video.DouyinPublishListRequest, callOptions ...callopt.Option) (r *video.DouyinPublishListResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DouyinPublishListMethod(ctx, req)
+}
+
+func (p *kDouyinServiceClient) DouyinGetVedioMethod(ctx context.Context, req *video.GetVedioRequest, callOptions ...callopt.Option) (r *video.GetVedioResponse, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.DouyinGetVedioMethod(ctx, req)
+}
+
+func (p *kDouyinServiceClient) DouyinMGetVedioMethod(ctx context.Context, req *video.MGetVedioRequest, callOptions ...callopt.Option) (r *video.MGetVedioResponse, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.DouyinMGetVedioMethod(ctx, req)
 }

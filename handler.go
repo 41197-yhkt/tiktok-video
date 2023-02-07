@@ -57,3 +57,30 @@ func (s *DouyinServiceImpl) DouyinPublishListMethod(ctx context.Context, req *vi
 	resp.BaseResp = pack.BuildBaseResp(errno.Success)
 	return resp, nil
 }
+
+// DouyinGetVedioMethod implements the DouyinServiceImpl interface.
+func (s *DouyinServiceImpl) DouyinGetVedioMethod(ctx context.Context, req *video.GetVedioRequest) (resp *video.GetVedioResponse, err error) {
+	// TODO: Your code here...
+	resp = new(video.GetVedioResponse)
+
+	//调用服务
+	resp.Video, err = service.NewGetVedioService(ctx).GetVedio(req)
+
+	return resp, err
+}
+
+// DouyinMGetVedioMethod implements the DouyinServiceImpl interface.
+func (s *DouyinServiceImpl) DouyinMGetVedioMethod(ctx context.Context, req *video.MGetVedioRequest) (resp *video.MGetVedioResponse, err error) {
+	// TODO: Your code here...
+	resp = new(video.MGetVedioResponse)
+	var res *video.Video
+	for _, vid := range req.TargetVediosId {
+		r := new(video.GetVedioRequest)
+		r.UserId = req.UserId
+		r.TargetVedioId = vid
+
+		res, err = service.NewGetVedioService(ctx).GetVedio(r)
+		resp.VedioList = append(resp.VedioList, res)
+	}
+	return resp, err
+}

@@ -21,6 +21,8 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	methods := map[string]kitex.MethodInfo{
 		"DouyinPublishActionMethod": kitex.NewMethodInfo(douyinPublishActionMethodHandler, newDouyinServiceDouyinPublishActionMethodArgs, newDouyinServiceDouyinPublishActionMethodResult, false),
 		"DouyinPublishListMethod":   kitex.NewMethodInfo(douyinPublishListMethodHandler, newDouyinServiceDouyinPublishListMethodArgs, newDouyinServiceDouyinPublishListMethodResult, false),
+		"DouyinGetVedioMethod":      kitex.NewMethodInfo(douyinGetVedioMethodHandler, newDouyinServiceDouyinGetVedioMethodArgs, newDouyinServiceDouyinGetVedioMethodResult, false),
+		"DouyinMGetVedioMethod":     kitex.NewMethodInfo(douyinMGetVedioMethodHandler, newDouyinServiceDouyinMGetVedioMethodArgs, newDouyinServiceDouyinMGetVedioMethodResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "video",
@@ -72,6 +74,42 @@ func newDouyinServiceDouyinPublishListMethodResult() interface{} {
 	return video.NewDouyinServiceDouyinPublishListMethodResult()
 }
 
+func douyinGetVedioMethodHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*video.DouyinServiceDouyinGetVedioMethodArgs)
+	realResult := result.(*video.DouyinServiceDouyinGetVedioMethodResult)
+	success, err := handler.(video.DouyinService).DouyinGetVedioMethod(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newDouyinServiceDouyinGetVedioMethodArgs() interface{} {
+	return video.NewDouyinServiceDouyinGetVedioMethodArgs()
+}
+
+func newDouyinServiceDouyinGetVedioMethodResult() interface{} {
+	return video.NewDouyinServiceDouyinGetVedioMethodResult()
+}
+
+func douyinMGetVedioMethodHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*video.DouyinServiceDouyinMGetVedioMethodArgs)
+	realResult := result.(*video.DouyinServiceDouyinMGetVedioMethodResult)
+	success, err := handler.(video.DouyinService).DouyinMGetVedioMethod(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newDouyinServiceDouyinMGetVedioMethodArgs() interface{} {
+	return video.NewDouyinServiceDouyinMGetVedioMethodArgs()
+}
+
+func newDouyinServiceDouyinMGetVedioMethodResult() interface{} {
+	return video.NewDouyinServiceDouyinMGetVedioMethodResult()
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -97,6 +135,26 @@ func (p *kClient) DouyinPublishListMethod(ctx context.Context, req *video.Douyin
 	_args.Req = req
 	var _result video.DouyinServiceDouyinPublishListMethodResult
 	if err = p.c.Call(ctx, "DouyinPublishListMethod", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) DouyinGetVedioMethod(ctx context.Context, req *video.GetVedioRequest) (r *video.GetVedioResponse, err error) {
+	var _args video.DouyinServiceDouyinGetVedioMethodArgs
+	_args.Req = req
+	var _result video.DouyinServiceDouyinGetVedioMethodResult
+	if err = p.c.Call(ctx, "DouyinGetVedioMethod", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) DouyinMGetVedioMethod(ctx context.Context, req *video.MGetVedioRequest) (r *video.MGetVedioResponse, err error) {
+	var _args video.DouyinServiceDouyinMGetVedioMethodArgs
+	_args.Req = req
+	var _result video.DouyinServiceDouyinMGetVedioMethodResult
+	if err = p.c.Call(ctx, "DouyinMGetVedioMethod", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
