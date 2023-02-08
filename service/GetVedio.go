@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"strconv"
 
@@ -42,16 +41,12 @@ func (s *GetVideoService) GetVideo(req *video.GetVideoRequest) (*video.Video, er
 	var videos *model.Video
 	var isFavorite bool
 	var res *video.Video
-
 	dal.DB.WithContext(s.ctx).Where("Id = ?", req.TargetVideoId).Find(&videos)
-	fmt.Println(videos)
 
 	// video, err := videoDatabase.FindByID(int64(vd.Id))
 	// if err != nil {
 	//     panic(err)
 	// }
-	var user *video.User
-	dal.DB.WithContext(s.ctx).Select("name").Where("id = ?", videos.AuthorId).Find(&user.Name)
 
 	// 查询点赞数目
 	var favoriteCount int64
@@ -82,8 +77,10 @@ func (s *GetVideoService) GetVideo(req *video.GetVideoRequest) (*video.Video, er
 
 	// 封装
 	res = &video.Video{
-		Id:            req.TargetVideoId,
-		Author:        user,
+		Id: req.TargetVideoId,
+		Author: &video.User{
+			Id: videos.AuthorId,
+		},
 		PlayUrl:       playurl,
 		CoverUrl:      coverurl,
 		FavoriteCount: favoriteCount,
