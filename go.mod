@@ -3,28 +3,30 @@ module github.com/41197-yhkt/tiktok-video
 go 1.19
 
 require (
+	github.com/41197-yhkt/pkg v0.0.0-20230204134136-dd1dd3312a13
+	github.com/41197-yhkt/tiktok-user v0.0.0-20230208085403-1b17ec24a1bf
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.6+incompatible
 	github.com/apache/thrift v0.17.0
 	github.com/cloudwego/kitex v0.4.4
+	github.com/cloudwego/kitex-examples/bizdemo/easy_note v0.0.0-20230206055624-0041322143f7
+	github.com/kitex-contrib/registry-etcd v0.1.0
+	github.com/kitex-contrib/tracer-opentracing v0.0.3
 	gorm.io/driver/mysql v1.4.5
-	gorm.io/gen v0.3.19
+	gorm.io/gen v0.3.21
 	gorm.io/plugin/dbresolver v1.4.1
 )
 
 require (
-	github.com/41197-yhkt/pkg v0.0.0-20230204134136-dd1dd3312a13 // indirect
 	github.com/coreos/go-semver v0.3.1 // indirect
 	github.com/coreos/go-systemd/v22 v22.5.0 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/kitex-contrib/registry-etcd v0.1.0 // indirect
-	github.com/kitex-contrib/tracer-opentracing v0.0.3 // indirect
 	github.com/mattn/go-sqlite3 v1.14.16 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/stretchr/testify v1.8.0 // indirect
+	github.com/stretchr/objx v0.4.0 // indirect
 	github.com/uber/jaeger-client-go v2.30.0+incompatible // indirect
 	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
 	go.etcd.io/etcd/api/v3 v3.5.7 // indirect
@@ -40,7 +42,6 @@ require (
 	gorm.io/datatypes v1.1.0 // indirect
 	gorm.io/driver/sqlite v1.4.4 // indirect
 	gorm.io/hints v1.1.1 // indirect
-	gorm.io/plugin/opentracing v0.0.0-20211220013347-7d2b2af23560 // indirect
 )
 
 require (

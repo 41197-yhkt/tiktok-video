@@ -57,8 +57,7 @@ func (s *GetVideoService) GetVideo(req *video.GetVideoRequest) (*video.Video, er
 	commentCount, err = strconv.ParseInt(videos.CommentCount, 10, 64)
 
 	// 查询自己是不是也点了赞
-
-	err = userFavoriteDatabase.WithContext(s.ctx).FindByUseridAndVideoid(req.UserId, req.TargetVideoId)
+	err = userFavoriteDatabase.FindByUseridAndVideoid(req.UserId, req.TargetVideoId)
 	if err != nil {
 		isFavorite = false
 	} else {
@@ -88,6 +87,6 @@ func (s *GetVideoService) GetVideo(req *video.GetVideoRequest) (*video.Video, er
 		IsFavorite:    isFavorite,
 		Title:         videos.Title,
 	}
-
+	// fmt.Println(res)
 	return res, nil
 }

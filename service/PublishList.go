@@ -6,9 +6,11 @@ import (
 	"log"
 	"strconv"
 
+	"github.com/41197-yhkt/tiktok-user/kitex_gen/user"
 	dal "github.com/41197-yhkt/tiktok-video/gen/dal"
 	"github.com/41197-yhkt/tiktok-video/gen/dal/model"
 	video "github.com/41197-yhkt/tiktok-video/kitex_gen/video"
+	"github.com/41197-yhkt/tiktok-video/rpc"
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 )
@@ -52,8 +54,10 @@ func (s *PublishListService) PublishList(req *video.DouyinPublishListRequest) ([
 		// if err != nil {
 		//     panic(err)
 		// }
-		var user *video.User
-		dal.DB.WithContext(s.ctx).Select("name").Where("id = ?", vd.AuthorId).Find(&user.Name)
+		author, err := rpc.GetUser(s.ctx, &user.CompGetUserRequest{UserId: req.UserId, TargetUserId: vd.AuthorId})
+		if err != nil {
+			return nil, err
+		}
 
 		// 查询点赞数目
 		var favoriteCount int64
@@ -84,8 +88,14 @@ func (s *PublishListService) PublishList(req *video.DouyinPublishListRequest) ([
 
 		// 封装
 		res = append(res, &video.Video{
-			Id:            int64(vd.Id),
-			Author:        user,
+			Id: int64(vd.Id),
+			Author: &video.User{
+				Id:            author.Id,
+				Name:          author.Name,
+				FollowCount:   author.FollowCount,
+				FollowerCount: author.FollowerCount,
+				IsFollow:      author.IsFollow,
+			},
 			PlayUrl:       playurl,
 			CoverUrl:      coverurl,
 			FavoriteCount: favoriteCount,

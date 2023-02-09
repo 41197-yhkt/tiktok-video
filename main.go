@@ -6,6 +6,7 @@ import (
 
 	"github.com/41197-yhkt/tiktok-video/gen/dal"
 	video "github.com/41197-yhkt/tiktok-video/kitex_gen/video/douyinservice"
+	"github.com/41197-yhkt/tiktok-video/rpc"
 	"github.com/41197-yhkt/tiktok-video/service"
 
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
@@ -20,6 +21,7 @@ import (
 func Init() {
 	dal.Init()
 	service.Init()
+	rpc.InitRPC()
 }
 
 func main() {
